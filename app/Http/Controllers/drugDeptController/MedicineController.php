@@ -334,7 +334,7 @@ class MedicineController extends Controller
     {
         // Fetch your data with the associated generic name
         $medicines = Medicine::with('generic:id,generic_name') // Optimize the relationship query
-            ->select('name', 'category', 'route', 'generic_id', 'quantity', 'total_quantity', 'status')
+            ->select('id', 'name', 'category', 'route', 'generic_id', 'quantity', 'total_quantity', 'status')
             ->orderBy('name')
             ->get();
 
@@ -349,7 +349,7 @@ class MedicineController extends Controller
                 'quantity' => $medicine->quantity,
                 'total_quantity' => $medicine->total_quantity,
                 'status' => $medicine->status == 1 ? 'Active' : 'Inactive',
-                'used' => $medicine->getTotalUsedAttribute(), // Ensure this is efficient
+                'used' => $medicine->getTotalUsedAttribute(), // Call the model function
             ];
         }
 
