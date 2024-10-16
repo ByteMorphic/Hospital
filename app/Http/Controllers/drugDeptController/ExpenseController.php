@@ -181,6 +181,7 @@ class ExpenseController extends Controller
                 'Date' => $details['Date'],
                 'Ward' => $details['Ward'],
                 'Medicines' => implode("\r\n", $details['Medicines']), // Use "\r\n" for new line in Excel
+                'Total_Items' => count($details['Medicines']),
             ];
         }
 
@@ -194,6 +195,7 @@ class ExpenseController extends Controller
             'Date',
             'Ward',
             'Medicines',
+            'Total_Items',
         ];
 
         // Call to Export
