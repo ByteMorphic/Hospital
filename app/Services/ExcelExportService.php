@@ -4,6 +4,7 @@ namespace App\Services;
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
 class ExcelExportService
 {
@@ -37,6 +38,9 @@ class ExcelExportService
 
                 // Enable text wrapping
                 $sheet->getStyle($column . $row)->getAlignment()->setWrapText(true);
+
+                // set (Alignment::VERTICAL_CENTER) in sheet
+                $sheet->getStyle($column . $row)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
             }
             $row++;
         }
