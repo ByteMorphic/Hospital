@@ -234,7 +234,7 @@ class MedicineController extends Controller
         $request->validate([
             'quantity' => 'required|integer',
             'log_type' => 'required|string|max:255',
-            'expiry_date' => 'required|date',
+            'expiry_date' => 'nullable|date',
             'date' => 'required|date',
             'notes' => 'nullable|string|max:255',
             'medicine_id' => 'required|integer',
@@ -245,7 +245,11 @@ class MedicineController extends Controller
 
             if ($request->log_type == 'approve') {
                 $medicine->increment('quantity', $request->quantity);
-                $medicine->expiry_date = $request->expiry_date;
+                
+                // Update expiry_date only if provided and different from the existing value
+                if ($request->filled('expiry_date') && $request->expiry_date != $medicine->expiry_date) {
+                    $medicine->expiry_date = $request->expiry_date;
+                }
                 $medicine->total_quantity += $request->quantity;
             } elseif ($request->log_type == 'return') {
                 $medicine->decrement('quantity', $request->quantity);
@@ -330,13 +334,28 @@ class MedicineController extends Controller
         $this->excelExportService = $excelExportService;
     }
 
-    public function exportToExcel()
+    public function exportToExcel(Request $request)
     {
+        $request->validate([
+            'status' => 'required|string|max:255',
+            // validate only that have value = remove_zero_quantity
+            'ExcludeZeroQuantityMedicine' => 'nullable|string|max:5'
+        ]);
+
         // Fetch your data with the associated generic name
         $medicines = Medicine::with('generic:id,generic_name') // Optimize the relationship query
             ->select('id', 'name', 'category', 'route', 'generic_id', 'quantity', 'total_quantity', 'status')
             ->orderBy('name')
-            ->get();
+            ->where('status', $request->status == 'active' ? 1 : 0);
+
+        // Apply zero quantity filter if requested
+        if ($request->ExcludeZeroQuantityMedicine == 'yes') {
+            $medicines = $medicines->where('quantity', '>', 0);
+        }
+
+        // Execute the query to get the result
+        $medicines = $medicines->get();
+
 
         // Prepare the data
         $data = [];
@@ -359,8 +378,11 @@ class MedicineController extends Controller
         // Call the export service
         $filePath = $this->excelExportService->export($data, $headers, 'medicines.xlsx');
 
+        // file name
+        $filename = "medicine_" . date('Ymd') . ".xlsx";
+
         // Return the file as a download response
-        return Response::download($filePath, 'medicines.xlsx')->deleteFileAfterSend(true);
+        return Response::download($filePath, $filename)->deleteFileAfterSend(true);
     }
 
 }

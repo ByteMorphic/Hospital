@@ -23,6 +23,7 @@
                                 <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">Sr No.</th>
                                 <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">Medicine Name</th>
                                 <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">Generic Name</th>
+                                <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">Hmis Quantity</th>
                                 <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">Old Quantity</th>
                                 <th class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">Total Used</th>
                             </tr>
@@ -33,6 +34,7 @@
                                     <td class="px-4 py-2 font-medium text-gray-900 whitespace-nowrap">{{ $loop->iteration }}</td>
                                     <td class="px-4 py-2 text-gray-700 whitespace-nowrap">{{ $medicine->name }}</td>
                                     <td class="px-4 py-2 text-gray-700 whitespace-nowrap">{{ $medicine->generic->generic_name }} </td>
+                                    <td class="px-4 py-2 text-gray-700 whitespace-nowrap">{{ $medicine->total_quantity }}</td>
                                     <td class="px-4 py-2 text-gray-700 whitespace-nowrap">{{ $medicine->getResultAttribute() }}</td>
                                     <td class="px-4 py-2 text-gray-700 whitespace-nowrap">{{ $medicine->getTotalUsedAttribute() }}</td>
                                 </tr>
