@@ -5,7 +5,6 @@ namespace App\Http\Controllers\drugDeptController;
 use App\Models\Ward;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Laravel\Fortify\Features;
 
 class WardController extends Controller
 {
@@ -18,7 +17,6 @@ class WardController extends Controller
         return view('drugDept.ward.index', [
             'wards' => $wards,
         ]);
-        
     }
 
     /**

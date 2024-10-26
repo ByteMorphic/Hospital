@@ -73,14 +73,7 @@ return [
     |
     */
 
-    // check if url have any intended query
-    'home' => function () {
-        if (request()->has('intended')) {
-            return request()->get('intended');
-        } else {
-            return '/expense';
-        }
-    },
+    'home' => '/expense',
 
     /*
     |--------------------------------------------------------------------------

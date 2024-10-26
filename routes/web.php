@@ -41,7 +41,7 @@ Route::middleware('role:admin')->group(function () {
     Route::get('medicines/hmis', [MedicineController::class, 'totalAdd'])->name('medicines.totalAdd');
     Route::post('medicines/hmis', [MedicineController::class, 'totalAddStore'])->name('medicines.totalAddStore');
     // these route will remove in future (Because it not ralevent in future) - end
-    Route::post('medicines/export-to-excel', [MedicineController::class, 'exportToExcel'])->name('medicines.export-to-excel');
+    Route::get('medicines/export-to-excel', [MedicineController::class, 'exportToExcel'])->name('medicines.export-to-excel');
     Route::resource('medicines', MedicineController::class);
     Route::resource('generics', GenericController::class);
     Route::resource('expenseRecord', ExpenseRecordController::class);
