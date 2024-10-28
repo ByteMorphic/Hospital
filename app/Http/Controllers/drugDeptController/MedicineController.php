@@ -279,50 +279,6 @@ class MedicineController extends Controller
         }
     }
 
-    public function totalAdd(Request $request)
-    {
-        $query = Medicine::query();
-
-        if ($request->has('search')) {
-            $searchTerm = $request->search;
-            $query->where(function ($q) use ($searchTerm) {
-                $q->where('name', 'LIKE', "%{$searchTerm}%")
-                    ->orWhereHas('generic', function ($q) use ($searchTerm) {
-                        $q->where('generic_name', 'LIKE', "%{$searchTerm}%");
-                    });
-            });
-        }
-
-        $medicines = $query->orderBy('name')->paginate(25);
-
-        return view('drugDept.medicine.hmis', [
-            'medicines' => $medicines,
-        ]);
-    }
-
-    public function totalAddStore(Request $request)
-    {
-        $request->validate([
-            'quantity' => 'required|integer',
-            'medicine_id' => 'required|integer',
-        ]);
-
-        try {
-            DB::beginTransaction();
-
-            $medicine = Medicine::find($request->medicine_id);
-            $medicine->total_quantity += $request->quantity;
-            $medicine->save();
-
-            DB::commit();
-
-            return redirect('/medicines/hmis')->with('success', 'Stock updated successfully.');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()->with('error', 'An error occurred: ' . $e->getMessage());
-        }
-    }
-
     protected $excelExportService;
 
     public function __construct(ExcelExportService $excelExportService)
@@ -334,7 +290,7 @@ class MedicineController extends Controller
     {
         // Fetch your data with the associated generic name
         $medicines = Medicine::with('generic:id,generic_name') // Optimize the relationship query
-            ->select('name', 'category', 'route', 'generic_id', 'quantity', 'total_quantity', 'status')
+            ->select('id', 'name', 'category', 'route', 'generic_id', 'quantity', 'total_quantity', 'status')
             ->orderBy('name')
             ->get();
 
