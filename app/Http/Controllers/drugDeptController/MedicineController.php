@@ -227,6 +227,15 @@ class MedicineController extends Controller
         ]);
     }
     /**
+     * View Logs of Spacific Medicine
+     */
+    public function logs(Medicine $medicine)
+    {
+        $medicine = Medicine::with('generic')->find($medicine->id);
+        $medicineLogs = Medicine_log::query()->where('medicine_id', $medicine->id)->orderBy('id', 'desc')->get();
+        return view('drugDept.medicine.logs', compact('medicine', 'medicineLogs'));
+    }
+    /**
      * Add stock to the specified medicine.
      */
     public function AddStock(Request $request, Medicine $medicine)
@@ -234,7 +243,7 @@ class MedicineController extends Controller
         $request->validate([
             'quantity' => 'required|integer',
             'log_type' => 'required|string|max:255',
-            'expiry_date' => 'required|date',
+            'expiry_date' => 'nullable|date',
             'date' => 'required|date',
             'notes' => 'nullable|string|max:255',
             'medicine_id' => 'required|integer',
@@ -245,7 +254,9 @@ class MedicineController extends Controller
 
             if ($request->log_type == 'approve') {
                 $medicine->increment('quantity', $request->quantity);
-                $medicine->expiry_date = $request->expiry_date;
+                if ($request->expiry_date) {
+                    $medicine->expiry_date = $request->expiry_date;
+                }
                 $medicine->total_quantity += $request->quantity;
             } elseif ($request->log_type == 'return') {
                 $medicine->decrement('quantity', $request->quantity);

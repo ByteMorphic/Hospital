@@ -73,6 +73,10 @@
                                         class="px-3 py-1 text-sm font-medium text-blue-600 transition rounded-md hover:bg-blue-50">
                                         Edit
                                     </a>
+                                    <a href="{{ route('medicines.logs', $medicine->id) }}" 
+                                        class="px-3 py-1 text-sm font-medium text-green-400 transition rounded-md hover:bg-blue-50">
+                                        Logs
+                                    </a>
                                     <a href="{{ route('medicines.show', $medicine->id) }}" 
                                         class="px-3 py-1 text-sm font-medium text-purple-600 transition rounded-md hover:bg-purple-50">
                                         Show
@@ -167,7 +171,7 @@
                     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div>
                             <label for="expiry_date" class="block text-sm font-medium text-gray-700">Expiry Date</label>
-                            <input type="date" name="expiry_date" id="expiry_date" required
+                            <input type="date" name="expiry_date" id="expiry_date"
                                 class="block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                         </div>
                         <div>

@@ -36,6 +36,7 @@ Route::middleware([
 Route::middleware('role:admin')->group(function () {
     Route::resource('wards', WardController::class);
     Route::get('medicines/total', [MedicineController::class, 'total'])->name('medicines.total');
+    Route::get('medicines/{medicine}/logs', [MedicineController::class, 'logs'])->name('medicines.logs');
     Route::post('/medicines/{medicine}/add-stock', [MedicineController::class, 'AddStock'])->name('medicines.addStock');
     // these route will remove in future (Because it not ralevent in future) - start
     Route::get('medicines/hmis', [MedicineController::class, 'totalAdd'])->name('medicines.totalAdd');
