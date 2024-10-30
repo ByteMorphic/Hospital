@@ -1,9 +1,6 @@
 import Alpine from "alpinejs";
 
 // make visible globelly.
-window.Alpine = Alpine;git 
+window.Alpine = Alpine;
 // Start alpine
 Alpine.start();
-
-
-

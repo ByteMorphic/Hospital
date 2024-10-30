@@ -224,6 +224,10 @@
                                 <span class="ml-2">All Items</span>
                             </label>
                         </div>
+                        <label class="inline-flex items-center">
+                            <input type="radio" name="excludeZero" value="true" class="text-blue-600">
+                            <span class="ml-2">Exclude Zero Quantity</span>
+                        </label>
                     </div>
 
                     <div class="flex justify-end gap-3 mt-5">

@@ -286,13 +286,31 @@ class MedicineController extends Controller
         $this->excelExportService = $excelExportService;
     }
 
-    public function exportToExcel()
+    public function exportToExcel(Request $request)
     {
+        $request->validate([
+            'status' => 'nullable|string',
+            'excludeZero' => 'nullable|string'
+        ]);
+
         // Fetch your data with the associated generic name
         $medicines = Medicine::with('generic:id,generic_name') // Optimize the relationship query
-            ->select('id', 'name', 'category', 'route', 'generic_id', 'quantity', 'total_quantity', 'status')
-            ->orderBy('name')
-            ->get();
+            ->select('id', 'name', 'category', 'route', 'generic_id', 'quantity', 'total_quantity', 'status');
+
+        // Apply filters
+        if ($request->filled('status')) {
+            $status = $request->input('status');
+            if ($status === 'active') {
+                $medicines->where('status', 1);
+            } elseif ($status === 'inactive') {
+                $medicines->where('status', 0);
+            }
+        }
+        if ($request->has('excludeZero') && $request->input('excludeZero') === 'true') {
+            $medicines->where('quantity', '>', 0);
+        }
+
+        $medicines = $medicines->orderBy('name')->get();
 
         // Prepare the data
         $data = [];
