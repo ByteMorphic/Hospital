@@ -1,4 +1,7 @@
-<x-drugdept.layout title="HMS Sahiwal Teaching Hospital">
+@extends('layouts.app')
+@section('title', 'HMS Sahiwal Teaching Hospital')
+@section('content')
+
   <div class="min-h-screen bg-gray-100 dark:bg-gray-900 ">
     <!-- Hero Section -->
     <section class="py-20 text-white bg-gradient-to-r from-blue-600 to-indigo-700">
@@ -75,4 +78,4 @@
       }
     }
   </style>
-</x-drugdept.layout>
+@endsection

@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en" class="h-full bg-white">
+@extends('layouts.app')
+@section('title', 'Edit Generic Name')
+@section('content')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Edit Generic</title>
-</head>
-
-<body class="h-full">
-    <div class="container p-24 mx-auto">
+<div class="container p-24 mx-auto">
         <h1 class="text-2xl font-bold text-center mb-4">Edit Generic</h1>
         <hr>
         <br />
@@ -77,6 +70,4 @@
             </div>
         </form>
     </div>
-</body>
-
-</html>
+@endsection

@@ -12,11 +12,11 @@
     </head>
     <body class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900">
         <header>
-            <x-drugdept.nav />
+            <x-nav />
         </header>
 
         <!-- Notification component -->
-        <x-drugdept.notification />
+        <x-notification />
 
         <main class="container flex-grow px-4 mx-auto">
             @yield('content')

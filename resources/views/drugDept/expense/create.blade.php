@@ -1,4 +1,6 @@
-<x-drugdept.layout title="Create Expense">
+@extends('layouts.app')
+@section('title', 'Create Expense')
+@section('content')
     <div class="container">
         <div class="p-4 pt-10 mx-auto">
             <h1 class="mb-4 text-2xl font-bold text-center text-gray-800 dark:text-white">Enter Expense Details</h1>
@@ -59,4 +61,4 @@
     <script>
         document.getElementById('date').valueAsDate = new Date();
     </script>
-</x-drugdept.layout>
+@endsection

@@ -1,5 +1,8 @@
-<x-drugdept.layout title="Generics List">
-    <div class="container">
+@extends('layouts.app')
+@section('title', 'Generics List')
+@section('content')
+
+<div class="container">
 
         <div class="container p-24 mx-auto">
             <h1 class="text-2xl font-bold text-center mb-4">Generics</h1>
@@ -73,4 +76,4 @@
         </div>
         </div>
     </div>
-</x-drugdept.layout>
+@endsection

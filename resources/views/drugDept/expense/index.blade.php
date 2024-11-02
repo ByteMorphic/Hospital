@@ -1,5 +1,8 @@
-<x-drugdept.layout title="Expense Records">
-    <div class="container">
+@extends('layouts.app')
+@section('title', 'Expense Records')
+@section('content')
+
+<div class="container">
         <div class="container p-24 mx-auto">
             <h1 class="mb-4 text-2xl font-bold text-center text-gray-900 dark:text-white">Expense History</h1>
             <a href="{{ route('expense.create') }}"
@@ -79,7 +82,7 @@
                 </div>
             </div>
         <div class="flex items-center justify-center gap-3 my-4 text-sm">
-        <x-drugdept.pagination :paginator="$records" />
+        <x-pagination :paginator="$records" />
         </div>
         </div>
     </div>
@@ -144,5 +147,5 @@
     
 
 </script>
-</x-drugdept.layout>
+@endsection
 

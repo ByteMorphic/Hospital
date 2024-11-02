@@ -1,3 +1,4 @@
+@vite(['resources/js/app.js'])
 <nav x-data="{ isOpen: false }" @keydown.escape="isOpen = false" class="relative mb-5 bg-white shadow dark:bg-gray-799">
     <div class="w-full px-6 py-4 dark:text-gray-300 dark:bg-gray-800">
         <div class="lg:flex lg:items-center lg:justify-between">

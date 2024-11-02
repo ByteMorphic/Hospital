@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en" class="h-full bg-white">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Create Generic</title>
-</head>
-
-<body class="h-full">
+@extends('layouts.app')
+@section('title', 'Create Generic Name')
+@section('content')
     <div class="container p-24 mx-auto">
         <h1 class="text-2xl font-bold text-center mb-4">Create Generic</h1>
         <hr>
@@ -76,6 +68,4 @@
             </div>
         </form>
     </div>
-</body>
-
-</html>
+@endsection

@@ -49,12 +49,23 @@ class ExpenseController extends Controller
         ]);
 
         try {
+            // Check if an expense with the same date and ward_id already exists
+            $existingExpense = Expense::where('date', $request->date)
+                ->where('ward_id', $request->ward_id)
+                ->first();
+
+            if ($existingExpense) {
+                // Redirect to the existing expense's record creation page
+                return redirect()->route('expenseRecord.create', ['expense_id' => $existingExpense->id])
+                    ->with('info', 'Expense already exists for this date and ward. Redirected to existing expense.');
+            } else {
+                // Create a new expense
             $expense = Expense::create([
                 'date' => $request->date,
                 'ward_id' => $request->ward_id,
                 'user_id' => Auth::user()->id,
             ]);
-
+            }
             return redirect()->route('expenseRecord.create', ['expense_id' => $expense->id])
                 ->with('success', 'Expense created successfully');
         } catch (\Exception $e) {

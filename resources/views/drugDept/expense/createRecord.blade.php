@@ -1,4 +1,6 @@
-<x-drugdept.layout title="Create New Record">
+@extends('layouts.app')
+@section('title', 'Create New Record')
+@section('content')
     <style>
         .select2-container--default .select2-selection--single {
             height: auto;
@@ -336,4 +338,4 @@
             }
         });
     </script>
-</x-drugdept.layout>
+@endsection

@@ -1,4 +1,6 @@
-<x-drugdept.layout title="{{ $ward->ward_name }} Details">
+@extends('layouts.app')
+@section('title', '{{ $ward->ward_name }}')
+@section('content')
     <div class="container">
         <div class="container p-4 mx-auto">
             <table class="table-auto w-full">
@@ -25,4 +27,4 @@
             <a href="{{ URL::previous() }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Back</a>
         </div>
     </div>
-</x-drugdept.layout>
+@endsection

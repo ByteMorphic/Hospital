@@ -1,4 +1,6 @@
-<x-drugdept.layout title="Create Ward Record">
+@extends('layouts.app')
+@section('title', 'Create New Ward Record')
+@section('content')
     <div class="container">
 
         <div class="container p-4 mx-auto">
@@ -64,4 +66,4 @@
         </div>
     </div>
     </div>
-</x-drugdept.layout>
+@endsection

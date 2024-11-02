@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <title>Generic Info</title>
-</head>
-
-<body>
+@extends('layouts.app')
+@section('title', 'Generic Info')
+@section('content')
     <div class="container">
         <div class="h-10 bg-blue-500 w-full mb-4">
             <div class="container p-24 mx-auto">
@@ -56,6 +48,4 @@
                 </table>
             </div>
         </div>
-</body>
-
-</html>
+@endsection

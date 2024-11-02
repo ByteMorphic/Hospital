@@ -1,4 +1,5 @@
-<x-drugdept.layout title="Wards">
+@extends('layouts.app')
+@section('title', 'Wards List')
     <div class="container">
 
         <div class="container p-24 mx-auto">
@@ -76,4 +77,4 @@
         </div>
         </div>
     </div>
-</x-drugdept.layout>
+@endsection
