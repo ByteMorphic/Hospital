@@ -1,9 +1,10 @@
 @extends('layouts.app')
 @section('title', 'Wards List')
+@section('content')
     <div class="container">
 
         <div class="container p-24 mx-auto">
-            <h1 class="text-2xl font-bold text-center mb-4">Wards</h1>
+            <h1 class="text-2xl font-bold text-center mb-4 dark:text-white ">Wards</h1>
             <a href="{{ route('wards.create') }}"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create New Ward</a>
             <br />
@@ -73,7 +74,7 @@
                 </div>
             </div>
         <div class="flex items-center justify-center gap-3 my-4 text-sm">
-        <x-drugdept.pagination :paginator="$wards" />
+        <x-pagination :paginator="$wards" />
         </div>
         </div>
     </div>
