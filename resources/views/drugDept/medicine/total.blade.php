@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="flex items-center justify-center gap-3 my-4 text-sm">
-                <x-drugdept.pagination :paginator="$medicines" />
+                <x-pagination :paginator="$medicines" />
             </div>
         </div>
     </div>
