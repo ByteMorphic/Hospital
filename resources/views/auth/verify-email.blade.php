@@ -1,5 +1,7 @@
-<x-guest-layout>
-    <x-authentication-card>
+@extends('layouts.guest')
+@section('title', 'verification')
+@section('content')
+<x-authentication-card>
         <x-slot name="logo">
             <x-authentication-card-logo />
         </x-slot>
@@ -42,4 +44,4 @@
             </div>
         </div>
     </x-authentication-card>
-</x-guest-layout>
+@endsection

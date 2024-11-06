@@ -1,7 +1,6 @@
-@extends('layouts.app')
-@section('title', 'HMS Sahiwal Teaching Hospital')
+@extends(Auth::check() ? 'layouts.app' : 'layouts.guest')
+@section('title', 'Home')
 @section('content')
-
   <div class="min-h-screen bg-gray-100 dark:bg-gray-900 ">
     <!-- Hero Section -->
     <section class="py-20 text-white bg-gradient-to-r from-blue-600 to-indigo-700">

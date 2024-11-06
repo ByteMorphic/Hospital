@@ -1,32 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modal Sidebar</title>
+    <title>Collapsible Sidebar</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="//unpkg.com/alpinejs" defer></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <style>
-  [x-cloak] { display: none !important; }
-  .nav-link.active {
-      @apply bg-indigo-50 text-indigo-600 border-l-4 border-indigo-600;
-  }
-  .dark .nav-link.active {
-      @apply bg-indigo-900/20 text-indigo-400 border-indigo-400;
-  }
+    [x-cloak] { display: none !important; }
+    .nav-link.active {
+        @apply bg-indigo-50 text-indigo-600 border-l-4 border-indigo-600;
+    }
+    .dark .nav-link.active {
+        @apply bg-indigo-900/20 text-indigo-400 border-indigo-400;
+    }
 </style>
 
-
-<body class="bg-gray-200 text-gray-800">
-    <header class="bg-white shadow-md">
-
-
-<!-- Sidebar Navigation -->
+<body>
 <div x-data="{ 
     isSidebarOpen: false,
+    isSidebarMinimized: false,
     isDark: false,
     currentPath: window.location.pathname,
     activeDropdown: null
@@ -42,33 +36,29 @@
                 </button>
                 <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">HMS</span>
             </div>
-            
-            <!-- Mobile Header Actions -->
-            <div class="flex items-center space-x-3">
-                <button @click="isDark = !isDark" class="p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
-                    <svg x-show="!isDark" class="w-6 h-6 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
-                    </svg>
-                    <svg x-show="isDark" class="w-6 h-6 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/>
-                    </svg>
-                </button>
-            </div>
         </div>
     </div>
 
     <!-- Sidebar -->
-    <div :class="{'translate-x-0': isSidebarOpen, '-translate-x-full': !isSidebarOpen}" 
-         class="fixed inset-y-0 left-0 z-20 w-64 bg-white dark:bg-gray-800 border-r dark:border-gray-700 transform transition-transform duration-200 lg:translate-x-0">
+    <div :class="{
+            'translate-x-0': isSidebarOpen,
+            '-translate-x-full': !isSidebarOpen,
+            'w-64': !isSidebarMinimized,
+            'w-20': isSidebarMinimized
+         }" 
+         class="fixed inset-y-0 left-0 z-20 bg-white dark:bg-gray-800 border-r dark:border-gray-700 transform transition-all duration-300 lg:translate-x-0">
+        
         <!-- Sidebar Header -->
         <div class="flex items-center justify-between h-16 px-4 border-b dark:border-gray-700">
-            <span class="text-lg font-semibold text-gray-800 dark:text-gray-200">HMS</span>
-            <button @click="isDark = !isDark" class="p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 lg:hidden">
-                <svg x-show="!isDark" class="w-6 h-6 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+            <span x-show="!isSidebarMinimized" class="text-lg font-semibold text-gray-800 dark:text-gray-200">HMS</span>
+            <!-- Toggle Minimize Button (Desktop Only) -->
+            <button @click="isSidebarMinimized = !isSidebarMinimized" 
+                    class="hidden lg:block p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                <svg x-show="!isSidebarMinimized" class="w-6 h-6 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
                 </svg>
-                <svg x-show="isDark" class="w-6 h-6 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707"/>
+                <svg x-show="isSidebarMinimized" class="w-6 h-6 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/>
                 </svg>
             </button>
         </div>
@@ -79,37 +69,38 @@
             <a href="/dashboard" 
                :class="{'active': currentPath === '/dashboard'}"
                class="nav-link flex items-center px-4 py-2.5 text-sm font-medium text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-5 h-5" :class="{'mr-3': !isSidebarMinimized}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
                 </svg>
-                Dashboard
+                <span x-show="!isSidebarMinimized">Dashboard</span>
             </a>
 
-            <!-- Medicine Dropdown -->
-            <div x-data="{ isOpen: false }" class="relative">
-                <button @click="activeDropdown = activeDropdown === 'medicine' ? null : 'medicine'"
-                        class="w-full flex items-center px-4 py-2.5 text-sm font-medium text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
-                    </svg>
-                    Medicine
-                    <svg :class="{'rotate-180': activeDropdown === 'medicine'}" 
-                         class="w-4 h-4 ml-auto transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                    </svg>
-                </button>
-                <div x-show="activeDropdown === 'medicine'"
-                     x-transition:enter="transition ease-out duration-200"
-                     x-transition:enter-start="opacity-0 transform -translate-y-2"
-                     x-transition:enter-end="opacity-100 transform translate-y-0"
-                     x-transition:leave="transition ease-in duration-150"
-                     x-transition:leave-start="opacity-100 transform translate-y-0"
-                     x-transition:leave-end="opacity-0 transform -translate-y-2"
-                     class="mt-1 pl-11 space-y-1">
-                    <a href="{{ route('medicines.create') }}" class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">Add New</a>
-                    <a href="{{ route('medicines.index') }}" class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">View All</a>
-                </div>
-            </div>
+<!-- Medicine Dropdown -->
+<div x-data="{ isOpen: false }" class="relative">
+    <button @click="if (!isSidebarMinimized) activeDropdown = activeDropdown === 'medicine' ? null : 'medicine'"
+            class="w-full flex items-center px-4 py-2.5 text-sm font-medium text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 group">
+        <svg class="w-5 h-5" :class="{'mr-3': !isSidebarMinimized}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+        </svg>
+        <template x-if="!isSidebarMinimized">
+            <span class="flex-1 text-left">Medicine</span>
+        </template>
+        <svg x-show="!isSidebarMinimized" 
+             :class="{'rotate-180': activeDropdown === 'medicine'}" 
+             class="w-4 h-4 ml-auto transform transition-transform duration-200" 
+             fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+        </svg>
+    </button>
+    <div x-show="!isSidebarMinimized && activeDropdown === 'medicine'"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 transform -translate-y-2"
+         x-transition:enter-end="opacity-100 transform translate-y-0"
+         class="mt-1 pl-11 space-y-1">
+        <a href="{{ route('medicines.create') }}" class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">Add New</a>
+        <a href="{{ route('medicines.index') }}" class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">View All</a>
+    </div>
+</div>
 
             <!-- Wards Dropdown -->
             <div x-data="{ isOpen: false }" class="relative">
@@ -132,8 +123,8 @@
                      x-transition:leave-start="opacity-100 transform translate-y-0"
                      x-transition:leave-end="opacity-0 transform -translate-y-2"
                      class="mt-1 pl-11 space-y-1">
-                    <a href="/wards/create" class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">Add New</a>
-                    <a href="/wards" class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">View All</a>
+                    <a href="{{ route('wards.create') }}" class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">Add New</a>
+                    <a href="{{ route('wards.index') }}" class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">View All</a>
                 </div>
             </div>
 
@@ -158,12 +149,12 @@
                      x-transition:leave-start="opacity-100 transform translate-y-0"
                      x-transition:leave-end="opacity-0 transform -translate-y-2"
                      class="mt-1 pl-11 space-y-1">
-                    <a href="/expense/create" class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">Add New</a>
-                    <a href="/expense" class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">View All</a>
+                    <a href="{{ route('expense.create') }}" class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">Add New</a>
+                    <a href="{{ route('expense.index') }}" class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">View All</a>
                     <a href="/expense/reports" class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">Reports</a>
                 </div>
             </div>
-
+{{-- 
             <!-- Patients Dropdown -->
             <div x-data="{ isOpen: false }" class="relative">
                 <button @click="activeDropdown = activeDropdown === 'patients' ? null : 'patients'"
@@ -216,7 +207,7 @@
                     <a href="/staff" class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">View All</a>
                     <a href="/staff/schedules" class="block px-4 py-2 text-sm text-gray-600 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">Schedules</a>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Settings -->
             <a href="/settings" 
@@ -230,13 +221,16 @@
             </a>
 
             <!-- Logout -->
-            <a href="/logout" 
-               class="nav-link flex items-center px-4 py-2.5 text-sm font-medium text-red-600 dark:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 group">
-                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                </svg>
-                Logout
-            </a>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+            
+                <button type="submit" class="nav-link flex items-center px-4 py-2.5 text-sm font-medium text-red-600 dark:text-red-400 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 group">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                    </svg>
+                    Logout
+                </button>
+            </form>
         </nav>
     </div>
 

@@ -6,7 +6,7 @@
         <div class="container p-24 mx-auto">
             <h1 class="mb-4 text-2xl font-bold text-center text-gray-900 dark:text-white">Expense History</h1>
             <a href="{{ route('expense.create') }}"
-                class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-800" autofocus>New Expense</a>
+                class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-800" id="autofocus">New Expense</a>
                 <!--  download Button -->
                 <a href="javascript:void(0)"
                     class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-800"
@@ -144,7 +144,11 @@
 
     document.getElementById('start_date').value = firstDate;
     document.getElementById('end_date').value = lastDate;
-    
+    window.addEventListener("load", function() {
+        setTimeout(() => {
+            document.getElementById('autofocus').focus();
+        }, 50);  // Delay for 100ms
+    });
 
 </script>
 @endsection
