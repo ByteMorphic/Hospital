@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-        <div class="container p-24 mx-auto">
+        <div class=" p-6">
             <h1 class="mb-4 text-2xl font-bold text-center text-gray-900 dark:text-white">Expense History</h1>
             <a href="{{ route('expense.create') }}"
                 class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-800" id="autofocus">New Expense</a>

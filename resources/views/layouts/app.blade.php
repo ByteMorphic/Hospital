@@ -71,10 +71,14 @@
 
     <div x-data="{ 
         isSidebarOpen: false,
-        isSidebarMinimized: false,
-        isDark: window.matchMedia('(prefers-color-scheme: white)').matches,
-        currentPath: window.location.pathname,
-        activeDropdown: null
+        isSidebarMinimized: localStorage.getItem('sidebarMinimized') === 'true',
+
+
+        
+        toggleSidebar() {
+            this.isSidebarMinimized = !this.isSidebarMinimized;
+            localStorage.setItem('sidebarMinimized', this.isSidebarMinimized);
+        }
     }" class="min-h-screen">
     <div class="mb-5 pb-5"></div>
         <x-sidebar.mobile-header />

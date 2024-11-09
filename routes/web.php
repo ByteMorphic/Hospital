@@ -14,7 +14,13 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 Route::get('/', function () {
     return view('landing');
 });
+Route::get('/home', function () {
+    return redirect('/');
+});
 
+Route::get('/login', function () {
+    return view('auth.login');
+});
 
 
 Route::get('/email/verify', function () {
