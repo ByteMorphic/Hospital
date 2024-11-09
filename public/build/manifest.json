@@ -1,6 +1,10 @@
 {
   "resources/css/app.css": {
+<<<<<<< HEAD
     "file": "assets/app-B8sGATF7.css",
+=======
+    "file": "assets/app-Bz4IeUMV.css",
+>>>>>>> parent of 4505ed4 (fix: dropdown in sidebar in not opening)
     "src": "resources/css/app.css",
     "isEntry": true
   },
