@@ -18,9 +18,9 @@ Route::get('/home', function () {
     return redirect('/');
 });
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
+// Route::get('/login', function () {
+//     return view('auth.login');
+// });
 
 
 Route::get('/email/verify', function () {
