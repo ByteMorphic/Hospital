@@ -6,6 +6,20 @@
 
         <div class="container p-24 mx-auto">
             <h1 class="text-2xl font-bold text-center mb-4">Generics</h1>
+
+            <br />
+
+            <form action="{{ route('generics.index') }}" method="GET" class="mb-4">
+                <div class="flex items-center">
+                    <input type="text" name="search" placeholder="Search by medicine or generic name"
+                           class="w-full px-4 py-2 border rounded-l"
+                           value="{{ request('search') }}">
+                    <button type="submit"
+                            class="px-4 py-2 font-bold text-white bg-blue-500 rounded-r hover:bg-blue-700">
+                        Search
+                    </button>
+                </div>
+            </form>
             <a href="{{ route('generics.create') }}"
                 class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create New Generic</a>
             <br />

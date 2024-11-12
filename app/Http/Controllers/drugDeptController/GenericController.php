@@ -11,9 +11,21 @@ class GenericController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $generics = Generic::orderBy('generic_name')->paginate(25);
+        // add search functionality
+        $query = Generic::query();
+
+        if ($request->has('search')) {
+            $searchTerm = $request->search;
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('generic_name', 'LIKE', "%{$searchTerm}%")
+                    ->orWhere('therapeutic_class', 'LIKE', "%{$searchTerm}%");
+            });
+        }
+
+        $generics = $query->orderBy('generic_name')->paginate(25);
+
         return view('drugDept.generic.index')->with('generics', $generics);
     }
 
