@@ -32,7 +32,7 @@
                                     <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
                                         {{ $loop->iteration }}</td>
                                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $generic->generic_name }}</td>
-                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $generic->generic_description ? substr($generic->generic_description, 0, 50) . '...' : ''  }} 
+                                    <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $generic->generic_description ? substr($generic->generic_description, 0, 50) . '...' : ''  }}
                                     </td>
                                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $generic->therapeutic_class }}</td>
                                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{ $generic->generic_notes }}</td>
@@ -72,7 +72,7 @@
                 </div>
             </div>
         <div class="flex items-center justify-center gap-3 my-4 text-sm">
-        <x-drugdept.pagination :paginator="$generics" />
+        <x-pagination :paginator="$generics" />
         </div>
         </div>
     </div>
