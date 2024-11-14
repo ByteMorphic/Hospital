@@ -18,10 +18,6 @@ Route::get('/home', function () {
     return redirect('/');
 });
 
-// Route::get('/login', function () {
-//     return view('auth.login');
-// });
-
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
@@ -87,11 +83,4 @@ Route::middleware('role:user')->group(function () {
     Route::get('/profile', function () {
         return view('profile');
     })->name('profile');
-});
-
-
-Route::get('/execute-command', [ExecuteCommandController::class, 'executeCommand']);
-
-Route::get('/test', function () {
-    return view('test');
 });
