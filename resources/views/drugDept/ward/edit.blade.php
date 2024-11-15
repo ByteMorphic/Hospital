@@ -14,7 +14,7 @@
                     @csrf
                     @method('PUT')
                     <div class="mb-5">
-                        <label for="ward_name" class="mb-3 block text-base font-medium text-[#07074D]">
+                        <label for="ward_name" class="mb-3 block text-base font-medium text-[#07074D] dark:text-white">
                             Ward Name
                         </label>
                         <input type="text" name="ward_name" id="ward_name" placeholder="Ward Name"
@@ -25,7 +25,7 @@
                         @enderror
                     </div>
                     <div class="mb-5">
-                        <label for="ward_description" class="mb-3 block text-base font-medium text-[#07074D]">
+                        <label for="ward_description" class="mb-3 block text-base font-medium text-[#07074D] dark:text-white">
                             Ward Discription
                         </label>
                         <input type="text" name="ward_description" id="ward_description"
@@ -37,7 +37,7 @@
                         @enderror
                     </div>
                     <div class="mb-5">
-                        <label for="ward_capacity" class="mb-3 block text-base font-medium text-[#07074D]">
+                        <label for="ward_capacity" class="mb-3 block text-base font-medium text-[#07074D] dark:text-white">
                             Ward Capacity
                         </label>
                         <input type="number" name="ward_capacity" id="ward_capacity" placeholder="Patient Capacity"
@@ -48,7 +48,7 @@
                         @enderror
                     </div>
                     <div class="mb-5">
-                        <label for="ward_status" class="mb-3 block text-base font-medium text-[#07074D]">
+                        <label for="ward_status" class="mb-3 block text-base font-medium text-[#07074D] dark:text-white">
                             Status
                         </label>
                         <input type="checkbox" name="ward_status" id="ward_status"
