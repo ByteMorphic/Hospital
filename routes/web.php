@@ -60,7 +60,9 @@ Route::middleware([
 //
 // should login as admin to access the following routes redirectwith message
 Route::middleware('role:admin')->group(function () {
+    Route::get('/wards/search', [WardController::class, 'search'])->name('wards.search');
     Route::resource('wards', WardController::class);
+    Route::get('/medicines/search', [MedicineController::class, 'search'])->name('medicines.search');
     Route::get('medicines/total', [MedicineController::class, 'total'])->name('medicines.total');
     Route::get('medicines/{medicine}/logs', [MedicineController::class, 'logs'])->name('medicines.logs');
     Route::post('/medicines/{medicine}/add-stock', [MedicineController::class, 'AddStock'])->name('medicines.addStock');

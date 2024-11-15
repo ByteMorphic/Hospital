@@ -95,4 +95,26 @@ class WardController extends Controller
         $ward->delete();
         return redirect('/wards')->with('info', 'Ward deleted successfully.');
     }
+
+    public function search(Request $request)
+    {
+        $search = $request->get('q');
+        $query = Ward::query();
+
+        if ($search) {
+            $query->where('ward_name', 'LIKE', "%{$search}%");
+        }
+
+        $wards = $query->paginate(30);
+
+        return response()->json([
+            'items' => $wards->map(function ($ward) {
+                return [
+                    'id' => $ward->id,
+                    'text' => $ward->ward_name
+                ];
+            }),
+            'total_count' => $wards->total()
+        ]);
+    }
 }

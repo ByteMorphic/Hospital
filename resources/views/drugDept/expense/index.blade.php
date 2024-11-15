@@ -11,9 +11,87 @@
                 <a href="javascript:void(0)"
                     class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-800"
                     onclick="downloadModel.classList.remove('hidden')">Download</a>
-            <br />
-            <br />
-            <div class="border border-gray-200 rounded-lg dark:border-gray-700">
+                    <!--  filter button start -->
+                    <form action="{{ route('expense.index') }}" method="GET" class="w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center mt-5">
+        <!-- Ward Filter -->
+        <div class="lg:col-span-4">
+            <div class="flex items-center gap-2">
+                <label for="ward" class="text-gray-700 dark:text-gray-200 whitespace-nowrap w-20">Ward</label>
+                <select name="ward_id[]" id="ward" class="select2-ward w-full" multiple>
+                    @if(!empty($selectedWards))
+                        @foreach($selectedWards as $ward)
+                            <option value="{{ $ward->id }}" selected>{{ $ward->ward_name }}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
+        </div>
+
+        <!-- Medicine Filter -->
+        <div class="lg:col-span-5">
+            <div class="flex items-center gap-2">
+                <label for="medicine" class="text-gray-700 dark:text-gray-200 whitespace-nowrap w-20">Medicine</label>
+                <select name="medicine_id[]" id="medicine" class="select2-medicine w-full" multiple>
+                    @if(!empty($selectedMedicines))
+                        @foreach($selectedMedicines as $medicine)
+                            <option value="{{ $medicine->id }}" selected>{{ $medicine->name }}</option>
+                        @endforeach
+                    @endif
+                </select>
+            </div>
+        </div>
+
+        <!-- Filter Button -->
+        <div class="lg:col-span-2">
+            <button type="submit" class="w-full p-2 text-white bg-blue-500 rounded-md hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-800">
+                Filter
+            </button>
+        </div>
+    </div>
+</form>
+
+<!-- Add custom styles to make Select2 match your theme -->
+<style>
+    .select2-container .select2-selection--multiple {
+        min-height: 45px;
+        border-color: rgb(209 213 219);
+        border-radius: 0.375rem;
+    }
+
+    .dark .select2-container .select2-selection--multiple {
+        background-color: rgb(31 41 55);
+        border-color: rgb(75 85 99);
+    }
+
+    .select2-container .select2-selection--multiple .select2-selection__rendered {
+        padding: 4px 4px;
+    }
+
+    .dark .select2-dropdown {
+        background-color: rgb(31 41 55);
+        color: rgb(209 213 219);
+    }
+
+    .dark .select2-search__field {
+        background-color: rgb(17 24 39);
+        color: rgb(209 213 219);
+    }
+
+    .dark .select2-results__option {
+        color: rgb(209 213 219);
+    }
+
+    .dark .select2-results__option[aria-selected=true] {
+        background-color: rgb(55 65 81);
+    }
+
+    .dark .select2-results__option--highlighted[aria-selected] {
+        background-color: rgb(59 130 246);
+    }
+</style>
+                    <!--  filter button end -->
+            <div class="border mt-5 border-gray-200 rounded-lg dark:border-gray-700">
                 <div class="overflow-x-auto rounded-t-lg">
                     <table class="min-w-full text-sm bg-white divide-y-2 divide-gray-200 dark:divide-gray-700 dark:bg-gray-800">
                         <thead class="text-left">
@@ -152,4 +230,63 @@
 
 </script>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        // Initialize Select2
+        $('.select2-ward').select2({
+            placeholder: 'Select Wards',
+            allowClear: true,
+            ajax: {
+                url: '{{ route("wards.search") }}',
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term,
+                        page: params.page
+                    };
+                },
+                processResults: function(data, params) {
+                    params.page = params.page || 1;
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            }
+        });
+
+        $('.select2-medicine').select2({
+            placeholder: 'Select Medicines',
+            allowClear: true,
+            ajax: {
+                url: '{{ route("medicines.search") }}',
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term,
+                        page: params.page
+                    };
+                },
+                processResults: function(data, params) {
+                    params.page = params.page || 1;
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            }
+        });
+    });
+</script>
+@endpush
 

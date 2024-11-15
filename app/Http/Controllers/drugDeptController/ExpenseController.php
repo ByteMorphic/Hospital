@@ -20,12 +20,56 @@ class ExpenseController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        // Validate request
+        $request->validate([
+            'ward_id' => 'nullable|array',
+            'ward_id.*' => 'exists:wards,id',
+            'medicine_id' => 'nullable|array',
+            'medicine_id.*' => 'exists:medicines,id',
+        ]);
+
+        // Get active wards and medicines for select2 initial load
+        $selectedWards = collect();
+        $selectedMedicines = collect();
         $wards = Ward::orderBy('ward_name', 'asc')->where('ward_status', 1)->get();
-        $records = Expense::orderByDesc('date')->paginate(12);
-        $expenseRecords = ExpenseRecord::all();
-        return view('drugDept.expense.index', compact('records', 'expenseRecords', 'wards'));
+
+        if ($request->filled('ward_id')) {
+            $selectedWards = Ward::whereIn('id', $request->ward_id)
+                ->where('ward_status', 1)
+                ->orderBy('ward_name', 'asc')
+                ->get();
+        }
+
+        if ($request->filled('medicine_id')) {
+            $selectedMedicines = Medicine::whereIn('id', $request->medicine_id)
+                ->where('status', 1)
+                ->orderBy('name', 'asc')
+                ->get();
+        }
+
+        // Build the query
+        $records = Expense::query()
+            ->when($request->filled('ward_id'), function ($query) use ($request) {
+                return $query->whereIn('ward_id', $request->ward_id);
+            })
+            ->when($request->filled('medicine_id'), function ($query) use ($request) {
+                return $query->whereHas('expenseRecords', function ($subQuery) use ($request) {
+                    $subQuery->whereIn('medicine_id', $request->medicine_id);
+                });
+            })
+            ->orderBy('date', 'desc')
+            ->with(['ward', 'expenseRecords.medicine']) // Eager load relationships
+            ->paginate(12)
+            ->withQueryString(); // Append query parameters to pagination links
+
+        return view('drugDept.expense.index', compact(
+            'records',
+            'selectedWards',
+            'selectedMedicines',
+            'wards'
+        ));
     }
 
     /**
@@ -60,11 +104,11 @@ class ExpenseController extends Controller
                     ->with('info', 'Expense already exists for this date and ward. Redirected to existing expense.');
             } else {
                 // Create a new expense
-            $expense = Expense::create([
-                'date' => $request->date,
-                'ward_id' => $request->ward_id,
-                'user_id' => Auth::user()->id,
-            ]);
+                $expense = Expense::create([
+                    'date' => $request->date,
+                    'ward_id' => $request->ward_id,
+                    'user_id' => Auth::user()->id,
+                ]);
             }
             return redirect()->route('expenseRecord.create', ['expense_id' => $expense->id])
                 ->with('success', 'Expense created successfully');

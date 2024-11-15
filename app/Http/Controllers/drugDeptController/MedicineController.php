@@ -348,4 +348,84 @@ class MedicineController extends Controller
         return Response::download($filePath, 'medicines.xlsx')->deleteFileAfterSend(true);
     }
 
+
+    /**
+     * Search for medicines.
+     */
+    public function search(Request $request)
+    {
+        try {
+            $search = trim($request->get('q'));
+
+            // Base query with eager loading
+            $query = Medicine::query()
+                ->with(['generic'])
+                ->where('status', 1)
+                ->orderBy('name', 'asc');
+
+            // Apply search conditions if search term exists
+            if ($search) {
+                $searchTerm = '%' . $search . '%';
+
+                $query->where(function ($q) use ($searchTerm) {
+                    $q->where('name', 'LIKE', $searchTerm)
+                        ->orWhere('category', 'LIKE', $searchTerm)
+                        ->orWhere('route', 'LIKE', $searchTerm)
+                        ->orWhereHas('generic', function ($q) use ($searchTerm) {
+                            $q->where('generic_name', 'LIKE', $searchTerm);
+                        });
+                });
+            }
+
+            $medicines = $query->paginate(30);
+
+            // Transform the results
+            $transformedItems = $medicines->map(function ($medicine) {
+                $genericName = $medicine->generic->generic_name ?? 'N/A';
+
+                return [
+                    'id' => $medicine->id,
+                    'text' => $this->formatMedicineText($medicine, $genericName),
+                    'medicine_name' => $medicine->name,
+                    'generic_name' => $genericName,
+                    'category' => $medicine->category ?? 'N/A',
+                    'strength' => $medicine->strength ?? 'N/A',
+                    'route' => $medicine->route ?? 'N/A'
+                ];
+            });
+
+            return response()->json([
+                'success' => true,
+                'items' => $transformedItems,
+                'total_count' => $medicines->total(),
+                'current_page' => $medicines->currentPage(),
+                'per_page' => $medicines->perPage(),
+            ]);
+        } catch (\Exception $e) {
+            report($e);
+            return response()->json([
+                'success' => false,
+                'message' => 'An error occurred while searching medicines'
+            ], 500);
+        }
+    }
+
+    /**
+     * Format the medicine text display
+     *
+     * @param Medicine $medicine
+     * @param string $genericName
+     * @return string
+     */
+    private function formatMedicineText($medicine, $genericName): string
+    {
+        return sprintf(
+            '%s (%s) - %s (%s) - %s',
+            $medicine->name,
+            $genericName,
+            $medicine->category ?? 'N/A',
+            $medicine->strength ?? 'N/A',
+            $medicine->route ?? 'N/A'
+        );
+    }
 }
