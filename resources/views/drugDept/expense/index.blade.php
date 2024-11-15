@@ -15,7 +15,7 @@
                     <form action="{{ route('expense.index') }}" method="GET" class="w-full">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center mt-5">
         <!-- Ward Filter -->
-        <div class="lg:col-span-4">
+        <div class="lg:col-span-4 md:col-span-6">
             <div class="flex items-center gap-2">
                 <label for="ward" class="text-gray-700 dark:text-gray-200 whitespace-nowrap w-20">Ward</label>
                 <select name="ward_id[]" id="ward" class="select2-ward w-full" multiple>
@@ -29,7 +29,7 @@
         </div>
 
         <!-- Medicine Filter -->
-        <div class="lg:col-span-5">
+        <div class="lg:col-span-6 md:col-span-6">
             <div class="flex items-center gap-2">
                 <label for="medicine" class="text-gray-700 dark:text-gray-200 whitespace-nowrap w-20">Medicine</label>
                 <select name="medicine_id[]" id="medicine" class="select2-medicine w-full" multiple>
@@ -43,7 +43,7 @@
         </div>
 
         <!-- Filter Button -->
-        <div class="lg:col-span-2">
+        <div class="lg:col-span-2 md:col-span-12">
             <button type="submit" class="w-full p-2 text-white bg-blue-500 rounded-md hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-800">
                 Filter
             </button>
@@ -55,6 +55,8 @@
 <style>
     .select2-container .select2-selection--multiple {
         min-height: 45px;
+        min-width: 200px; /* Minimum width */
+        max-width: 400px; /* Maximum width */
         border-color: rgb(209 213 219);
         border-radius: 0.375rem;
     }
