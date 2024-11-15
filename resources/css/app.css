@@ -7,30 +7,10 @@
     display: none;
 }
 
-html {
-    scroll-behavior: smooth;
+.input{
+    @apply w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md placeholder:opacity-70 placeholder-gray-300
 }
 
-h1 {
-    @apply text-4xl font-bold;
-}
-
-h2 {
-    @apply text-3xl font-bold;
-}
-
-h3 {
-    @apply text-2xl font-bold;
-}
-
-h4 {
-    @apply text-xl font-bold;
-}
-
-h5 {
-    @apply text-lg font-bold;
-}
-
-h6 {
-    @apply text-base font-bold;
+.label{
+    @apply mb-3 block text-base font-medium text-[#07074D] dark:text-white
 }
