@@ -2,7 +2,7 @@
     <div
         class="fixed top-5 right-10 mt-8 z-50 w-full max-w-sm sm:w-96"
         x-data="{ show: true }"
-        x-init="setTimeout(() => show = false, 5000)"
+        x-init="setTimeout(() => show = false, 8000)"
         x-show="show"
     >
         @if (session('success'))
