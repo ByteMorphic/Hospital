@@ -17,6 +17,7 @@
                         <input type="date" name="date" id="date" autofocus
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md placeholder:opacity-70 placeholder-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:focus:border-blue-500"
                             value="{{ old('date') }}" />
+                            <span class="text-green-600 dark:text-green-300 text-sm">Write date as : mm/dd/yyyy</span>
                         @error('date')
                             <span class="text-red-500 dark:text-red-400">{{ $message }}</span>
                         @enderror
