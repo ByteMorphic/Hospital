@@ -14,7 +14,7 @@
                 </svg>
                 Create New Medicine
             </a>
-            <button onclick="openExcelExportModal()" 
+            <button onclick="openExcelExportModal()"
                 class="inline-flex items-center px-4 py-2 font-semibold text-white transition bg-green-500 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
                 <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
@@ -28,8 +28,8 @@
     <form action="{{ route('medicines.index') }}" method="GET" class="mb-6">
         <div class="flex flex-col gap-4 sm:flex-row">
             <div class="flex-1">
-                <input type="text" 
-                    name="search" 
+                <input type="text"
+                    name="search"
                     placeholder="Search by medicine or generic name"
                     class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     value="{{ request('search') }}">
@@ -59,7 +59,7 @@
                     @forelse($medicines as $medicine)
                         <tr class="transition hover:bg-gray-50" data-medicine-id="{{ $medicine->id }}">
                             <td class="px-6 py-4 whitespace-nowrap">{{ $loop->iteration }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $medicine->name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $medicine->name }} - {{ $medicine->category }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $medicine->generic->generic_name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap" id="quantity-{{ $medicine->id }}">{{ $medicine->quantity }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
@@ -69,29 +69,29 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex gap-2">
-                                    <a href="{{ route('medicines.edit', $medicine->id) }}" 
+                                    <a href="{{ route('medicines.edit', $medicine->id) }}"
                                         class="px-3 py-1 text-sm font-medium text-blue-600 transition rounded-md hover:bg-blue-50">
                                         Edit
                                     </a>
-                                    <a href="{{ route('medicines.logs', $medicine->id) }}" 
+                                    <a href="{{ route('medicines.logs', $medicine->id) }}"
                                         class="px-3 py-1 text-sm font-medium text-green-400 transition rounded-md hover:bg-blue-50">
                                         Logs
                                     </a>
-                                    <a href="{{ route('medicines.show', $medicine->id) }}" 
+                                    <a href="{{ route('medicines.show', $medicine->id) }}"
                                         class="px-3 py-1 text-sm font-medium text-purple-600 transition rounded-md hover:bg-purple-50">
                                         Show
                                     </a>
-                                    <button onclick="openModal({{ $medicine->id }})" 
+                                    <button onclick="openModal({{ $medicine->id }})"
                                         class="px-3 py-1 text-sm font-medium text-gray-600 transition rounded-md hover:bg-gray-50">
                                         Add Stock
                                     </button>
-                                    <form action="{{ route('medicines.destroy', $medicine->id) }}" 
-                                        method="POST" 
+                                    <form action="{{ route('medicines.destroy', $medicine->id) }}"
+                                        method="POST"
                                         class="inline-block delete-form"
                                         data-medicine-name="{{ $medicine->name }}">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" 
+                                        <button type="submit"
                                             class="px-3 py-1 text-sm font-medium text-red-600 transition rounded-md hover:bg-red-50">
                                             Delete
                                         </button>
@@ -133,7 +133,7 @@
                 <form id="addStockForm" class="space-y-4">
                     @csrf
                     <input type="hidden" name="medicine_id" id="medicine_id">
-                    
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Log Type</label>
                         <div class="mt-2 space-x-4">
@@ -258,7 +258,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Set today's date as default for transaction date
     document.getElementById('date').value = new Date().toISOString().slice(0, 10);
-    
+
     // Initialize delete form handlers
     initializeDeleteForms();
 });
@@ -280,14 +280,14 @@ function openExcelExportModal() {
 // Form handling
 document.getElementById('addStockForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    
+
     const form = e.target;
     const medicineId = document.getElementById('medicine_id').value;
     const formData = new FormData(form);
 
     try {
         const response = await axios.post(`/medicines/${medicineId}/add-stock`, formData);
-        
+
         if (response.data.success) {
             // Update quantity in table
             const quantityCell = document.getElementById(`quantity-${medicineId}`);
@@ -311,7 +311,7 @@ document.getElementById('addStockForm').addEventListener('submit', async functio
         }
     } catch (error) {
         console.error('Error:', error);
-        
+
         let errorMessage = 'An error occurred while updating the stock.';
         if (error.response && error.response.data && error.response.data.message) {
             errorMessage = error.response.data.message;
@@ -330,9 +330,9 @@ function initializeDeleteForms() {
     document.querySelectorAll('.delete-form').forEach(form => {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
+
             const medicineName = this.dataset.medicineName;
-            
+
             const result = await Swal.fire({
                 title: 'Are you sure?',
                 text: `You are about to delete ${medicineName}. This action cannot be undone!`,
@@ -347,7 +347,7 @@ function initializeDeleteForms() {
             if (result.isConfirmed) {
                 try {
                     await axios.delete(this.action);
-                    
+
                     await Swal.fire({
                         icon: 'success',
                         title: 'Deleted!',
@@ -360,7 +360,7 @@ function initializeDeleteForms() {
                     this.closest('tr').remove();
                 } catch (error) {
                     console.error('Error:', error);
-                    
+
                     await Swal.fire({
                         icon: 'error',
                         title: 'Error!',
