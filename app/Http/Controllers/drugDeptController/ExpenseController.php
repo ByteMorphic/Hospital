@@ -107,6 +107,7 @@ class ExpenseController extends Controller
                 $expense = Expense::create([
                     'date' => $request->date,
                     'ward_id' => $request->ward_id,
+                    'note' => $request->note,
                     'user_id' => Auth::user()->id,
                 ]);
             }
