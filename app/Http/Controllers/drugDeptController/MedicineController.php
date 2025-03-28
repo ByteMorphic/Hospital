@@ -11,6 +11,7 @@ use App\Models\Generic;
 use App\Models\Medicine;
 use App\Models\Medicine_log;
 use App\Services\ExcelExportService;
+use Carbon\Carbon;
 
 
 class MedicineController extends Controller
@@ -301,7 +302,7 @@ class MedicineController extends Controller
 
         // Fetch your data with the associated generic name
         $medicines = Medicine::with('generic:id,generic_name') // Optimize the relationship query
-            ->select('id', 'name', 'category', 'route', 'generic_id', 'quantity', 'total_quantity', 'status');
+            ->select('id', 'name', 'category', 'route', 'generic_id', 'quantity', 'total_quantity', 'status', 'expiry_date');
 
         // Apply filters
         if ($request->filled('status')) {
@@ -326,6 +327,7 @@ class MedicineController extends Controller
                 'category' => $medicine->category,
                 'route' => $medicine->route,
                 'generic_name' => $medicine->generic->generic_name ?? 'N/A', // Handle potential null
+                'expiry_date' => Carbon::parse($medicine->expiry_date)->format('d-m-Y'),
                 'quantity' => $medicine->quantity,
                 'total_quantity' => $medicine->total_quantity,
                 'status' => $medicine->status == 1 ? 'Active' : 'Inactive',
@@ -333,8 +335,9 @@ class MedicineController extends Controller
             ];
         }
 
+
         // Define the headers for the Excel file
-        $headers = ['Medicine Name', 'Category', 'Route', 'Generic Name', 'Quantity', 'Total Quantity', 'Status', 'Used'];
+        $headers = ['Medicine Name', 'Category', 'Route', 'Generic Name', 'Expiry Date' , 'Quantity', 'Total Quantity', 'Status', 'Used'];
 
         // Call the export service
         $filePath = $this->excelExportService->export($data, $headers, 'medicines.xlsx');
