@@ -6,7 +6,7 @@
             <div class="container p-24 mx-auto">
                 <h1 class="text-2xl font-bold text-center mb-4">Generic Info</h1>
                 <br />
-                <a href = "{{ route('generics.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" > Back </a>
+                <a href = "{{ route('generics.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-sm" > Back </a>
                 <br />
                 <br />
 

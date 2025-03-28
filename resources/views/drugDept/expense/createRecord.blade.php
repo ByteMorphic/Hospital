@@ -40,7 +40,7 @@
         }
 
         .input-group button {
-            flex-shrink: 0;
+            shrink: 0;
         }
 
         @media only screen and (max-width: 768px) {
@@ -98,7 +98,7 @@
         <h1 class="mb-8 text-4xl font-bold text-center text-gray-800 dark:text-white">Create New Record <span class="text-sm text-gray-400">({{ $expense->ward->ward_name }} - {{ \Carbon\Carbon::parse($expense->date)->format('d-m-Y') }})</span></h1>
         <hr class="mb-6 border-gray-300 dark:border-gray-600">
 
-        <a href="{{ route('expense.index') }}" class="inline-block px-4 py-2 mb-6 font-bold text-white bg-blue-600 rounded hover:bg-blue-800 dark:bg-blue-500 dark:hover:bg-blue-700" id="back-button">Back</a>
+        <a href="{{ route('expense.index') }}" class="inline-block px-4 py-2 mb-6 font-bold text-white bg-blue-600 rounded-sm hover:bg-blue-800 dark:bg-blue-500 dark:hover:bg-blue-700" id="back-button">Back</a>
 
         <div class="p-6 bg-white rounded-lg shadow-lg dark:bg-gray-800">
             <form id="expenseForm" class="space-y-6" action="{{ route('expenseRecord.store') }}" method="POST">
@@ -108,11 +108,11 @@
                 <div id="medicineFields" class="space-y-4"></div>
 
                 <div class="text-center">
-                    <button type="button" class="px-4 py-2 font-bold text-white bg-green-600 rounded hover:bg-green-800 dark:bg-green-500 dark:hover:bg-green-700" onclick="addMedicineField()">Add Medicine</button>
+                    <button type="button" class="px-4 py-2 font-bold text-white bg-green-600 rounded-sm hover:bg-green-800 dark:bg-green-500 dark:hover:bg-green-700" onclick="addMedicineField()">Add Medicine</button>
                 </div>
 
                 <div class="mt-4 text-center">
-                    <button type="submit" class="px-4 py-2 font-bold text-white bg-blue-600 rounded hover:bg-blue-800 dark:bg-blue-500 dark:hover:bg-blue-700">Save</button>
+                    <button type="submit" class="px-4 py-2 font-bold text-white bg-blue-600 rounded-sm hover:bg-blue-800 dark:bg-blue-500 dark:hover:bg-blue-700">Save</button>
                 </div>
             </form>
         </div>
@@ -147,7 +147,7 @@
                     </div>
 
                     <div class="ml-4">
-                        <button type="button" class="px-4 py-2 font-bold text-white bg-red-600 rounded hover:bg-red-800 dark:bg-red-500 dark:hover:bg-red-700" onclick="removeMedicineField(${medicineIndex})">Remove</button>
+                        <button type="button" class="px-4 py-2 font-bold text-white bg-red-600 rounded-sm hover:bg-red-800 dark:bg-red-500 dark:hover:bg-red-700" onclick="removeMedicineField(${medicineIndex})">Remove</button>
                     </div>
 
                     <div class="flex-1">

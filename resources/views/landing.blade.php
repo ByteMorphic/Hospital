@@ -3,7 +3,7 @@
 @section('content')
   <div class="min-h-screen bg-gray-100 dark:bg-gray-900 ">
     <!-- Hero Section -->
-    <section class="py-20 text-white bg-gradient-to-r from-blue-600 to-indigo-700">
+    <section class="py-20 text-white bg-linear-to-r from-blue-600 to-indigo-700">
       <div class="container px-4 mx-auto text-center">
         <i class="mb-6 text-6xl fas fa-hospital-alt"></i>
         <h1 class="mb-4 text-4xl font-bold md:text-5xl">Welcome to Sahiwal Teaching Hospital</h1>

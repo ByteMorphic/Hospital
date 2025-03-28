@@ -8,7 +8,7 @@
     <input type="hidden" name="team_id" value="{{ $team->id }}">
 
     <!-- Team Switch Component -->
-    <button type="submit" class="flex items-center w-full p-2 rounded-md hover:bg-gray-700 dark:hover:bg-gray-600 focus:outline-none">
+    <button type="submit" class="flex items-center w-full p-2 rounded-md hover:bg-gray-700 dark:hover:bg-gray-600 focus:outline-hidden">
         <div class="flex items-center w-full">
             @if (Auth::user()->currentTeam->id === $team->id)
                 <svg class="me-2 h-5 w-5 text-green-400 dark:text-green-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">

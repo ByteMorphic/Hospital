@@ -13,7 +13,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <a href="{{ route('dashboard') }}" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <a href="{{ route('dashboard') }}" class="text-gray-500 hover:text-gray-700 focus:outline-hidden">
                         Dashboard
                     </a>
                 </div>
@@ -22,7 +22,7 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Settings Dropdown -->
                 <div class="relative">
-                    <button @click="open = ! open" class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none">
+                    <button @click="open = ! open" class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-hidden">
                         <span>{{ Auth::user()->name }}</span>
                         <svg class="ml-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -47,7 +47,7 @@
 
             <!-- Hamburger Menu for Mobile -->
             <div class="-mr-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none">
+                <button @click="open = ! open" class="inline-flex items-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-hidden">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{ 'hidden': open, 'inline-flex': !open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{ 'hidden': !open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />

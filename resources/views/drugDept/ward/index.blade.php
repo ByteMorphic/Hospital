@@ -6,7 +6,7 @@
         <div class="container p-24 mx-auto">
             <h1 class="text-2xl font-bold text-center mb-4 dark:text-white ">Wards</h1>
             <a href="{{ route('wards.create') }}"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create New Ward</a>
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-sm">Create New Ward</a>
             <br />
             <br />
             <br />
@@ -42,7 +42,7 @@
                                         {{ $ward->ward_status ? 'Active' : 'Inactive' }}</td>
                                     <td class="whitespace-nowrap px-4 py-2 text-gray-700">
                                         <span
-                                            class="inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow-sm pr-2 pl-2 ml-2 mr-2">
+                                            class="inline-flex -space-x-px overflow-hidden rounded-md border bg-white shadow-xs pr-2 pl-2 ml-2 mr-2">
                                             <button
                                                 class="inline-block px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:relative"><a
                                                     href="{{ route('wards.edit', $ward->id) }}"

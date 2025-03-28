@@ -7,11 +7,11 @@
         <div class=" p-6">
             <h1 class="mb-4 text-2xl font-bold text-center text-gray-900 dark:text-white">Expense History</h1>
             <a href="{{ route('expense.create') }}"
-                class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-800"
+                class="px-4 py-2 font-bold text-white bg-blue-500 rounded-sm hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-800"
                 id="autofocus">New Expense</a>
             <!--  download Button -->
             <a href="javascript:void(0)"
-                class="px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-800"
+                class="px-4 py-2 font-bold text-white bg-blue-500 rounded-sm hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-800"
                 onclick="downloadModel.classList.remove('hidden')">Download</a>
             <!--  filter button start -->
             <form action="{{ route('expense.index') }}" method="GET" class="w-full">
@@ -132,7 +132,7 @@
                                             <div class="tooltip-container relative inline-block ml-1">
                                                 <button 
                                                     type="button" 
-                                                    class="tooltip-trigger focus:outline-none"
+                                                    class="tooltip-trigger focus:outline-hidden"
                                                     aria-describedby="tooltip-{{ $record->id }}"
                                                     tabindex="0"
                                                 >
@@ -153,7 +153,7 @@
                                                 <div 
                                                     id="tooltip-{{ $record->id }}"
                                                     role="tooltip"
-                                                    class="tooltip absolute z-10 p-2 text-xs text-gray-700 bg-gray-100 border border-gray-200 rounded-md shadow-sm opacity-0 invisible transition-all duration-300 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 max-w-xs"
+                                                    class="tooltip absolute z-10 p-2 text-xs text-gray-700 bg-gray-100 border border-gray-200 rounded-md shadow-xs opacity-0 invisible transition-all duration-300 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600 max-w-xs"
                                                 >
                                                     <div class="truncate">
                                                         {{ Str::limit($record->note, 80) }}
@@ -170,7 +170,7 @@
                                     </td>
                                     <td class="px-4 py-2 text-center text-gray-700 whitespace-nowrap dark:text-gray-300">
                                         <div
-                                            class="inline-flex items-center gap-2 bg-white dark:bg-gray-700 border rounded-md shadow-sm">
+                                            class="inline-flex items-center gap-2 bg-white dark:bg-gray-700 border rounded-md shadow-xs">
                                             <a href="{{ route('expense.edit', $record->id) }}"
                                                 class="px-4 py-2 text-sm text-blue-500 dark:text-blue-400 hover:underline">Edit</a>
                                             <a href="{{ route('expenseRecord.create', $record->id) }}"
@@ -255,7 +255,7 @@
                 );
                 
                 // Hide tooltip on mouse leave and blur
-                ['mouseleave', 'blur'].forEach(evt => 
+                ['mouseleave', 'blur-sm'].forEach(evt => 
                     trigger.addEventListener(evt, hideTooltip)
                 );
                 

@@ -6,7 +6,7 @@
         <h1 class="text-2xl font-bold text-center mb-4 dark:text-white">Create Medicine</h1>
         <hr>
         <br />
-        <a href="/medicines/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Back</a>
+        <a href="/medicines/" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-sm">Back</a>
     </div>
 
     <div class="mx-auto w-full max-w-[550px] p-3 shadow-lg rounded-md bg-white dark:bg-gray-800">
@@ -172,7 +172,7 @@
             <div>
                 <label for="status" class="label">Status</label>
                 <div class="mt-2">
-                    <input id="status" name="status" type="checkbox" class="rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" value="1" {{ old('status', $medicine->status ?? 'false') == '1' ? 'checked' : '' }}>
+                    <input id="status" name="status" type="checkbox" class="rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-hidden focus:border-[#6A64F1] focus:shadow-md" value="1" {{ old('status', $medicine->status ?? 'false') == '1' ? 'checked' : '' }}>
                     @error('status')
                         <span class="text-red-600 text-sm">{{ $message }}</span>
                     @enderror
@@ -193,7 +193,7 @@
 
             <!-- Submit Button -->
             <div>
-                <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
+                <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-xs hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Submit</button>
             </div>
 
         </form>

@@ -9,7 +9,7 @@
         @else
             <a
                 href="{{ $paginator->previousPageUrl() }}"
-                class="inline-flex items-center justify-center text-gray-900 bg-white border border-gray-100 rounded size-8 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
+                class="inline-flex items-center justify-center text-gray-900 bg-white border border-gray-100 rounded-sm size-8 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
             >
                 <span class="sr-only">Prev Page</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-3" viewBox="0 0 20 20" fill="black">
@@ -31,7 +31,7 @@
         @if ($paginator->hasMorePages())
             <a
                 href="{{ $paginator->nextPageUrl() }}"
-                class="inline-flex items-center justify-center text-gray-900 bg-white border border-gray-100 rounded size-8 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
+                class="inline-flex items-center justify-center text-gray-900 bg-white border border-gray-100 rounded-sm size-8 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
             >
                 <span class="sr-only">Next Page</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="size-3" viewBox="0 0 20 20" fill="currentColor">

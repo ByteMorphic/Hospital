@@ -90,7 +90,7 @@
 
         <!-- Main Content -->
         <div :class="{'lg:pl-64': !isSidebarMinimized, 'lg:pl-20': isSidebarMinimized}"
-             class="container flex-grow px-4 mx-auto transition-all duration-300"
+             class="container grow px-4 mx-auto transition-all duration-300"
              id="main-content"
              style="display: none;">
             <div class="pt-10 lg:pt-0">

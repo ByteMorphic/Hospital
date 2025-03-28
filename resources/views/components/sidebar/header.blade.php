@@ -1,5 +1,5 @@
 <div class="flex items-center justify-between h-16 px-4 border-b dark:border-gray-700">
-    <img x-show="!isSidebarMinimized" src="{{ asset('images/logo.png') }}" class="rounded h-7 w-auto"> 
+    <img x-show="!isSidebarMinimized" src="{{ asset('images/logo.png') }}" class="rounded-sm h-7 w-auto"> 
     <span x-show="!isSidebarMinimized" class="text-lg font-semibold text-gray-800 dark:text-gray-200">STH</span>
     <button @click="toggleSidebar()"
             class="hidden lg:block p-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"">

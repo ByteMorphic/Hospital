@@ -6,7 +6,7 @@
     <div class="container p-24 mx-auto">
         <h1 class="text-2xl font-bold text-center mb-4 dark:text-gray-200">Wards Info</h1>
 
-        <a href="{{ route('expense.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" autofocus>Back</a>
+        <a href="{{ route('expense.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-sm" autofocus>Back</a>
 
         <table class="table-auto border-collapse border border-blue-500 container mx-auto mt-4">
             <tr>
@@ -24,11 +24,11 @@
                             <div>
                                 <button 
                                     onclick="openEditModal({{ $record->id }}, '{{ $record->medicine_name }}', {{ $record->quantity }})" 
-                                    class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded mr-2">Edit</button>
+                                    class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-1 px-2 rounded-sm mr-2">Edit</button>
                                 <form action="{{ route('expenseRecord.destroy', $record->id) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
+                                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded-sm" onclick="return confirm('Are you sure you want to delete this record?')">Delete</button>
                                 </form>
                             </div>
                         </div>
@@ -51,10 +51,10 @@
                         <p id="medicineName" class="text-sm text-gray-500"></p>
                     </div>
                     <div class="mt-2">
-                        <input type="number" id="quantity" name="quantity" class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none" required>
+                        <input type="number" id="quantity" name="quantity" class="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-hidden" required>
                     </div>
                     <div class="items-center px-4 py-3">
-                        <button id="saveButton" type="submit" class="px-4 py-2 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                        <button id="saveButton" type="submit" class="px-4 py-2 bg-blue-500 text-white text-base font-medium rounded-md w-full shadow-xs hover:bg-blue-700 focus:outline-hidden focus:ring-2 focus:ring-blue-300">
                             Save
                         </button>
                         <button type="button" onclick="closeEditModal()" class="mt-2 w-full px-4 py-2 bg-gray-300 hover:bg-gray-400 text-black rounded-md">Cancel</button>

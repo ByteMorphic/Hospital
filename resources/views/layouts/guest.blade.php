@@ -14,7 +14,7 @@
 <body class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900">
 
 
-    <main class="container flex-grow px-4 mx-auto">
+    <main class="container grow px-4 mx-auto">
         @yield('content')
     </main>
 

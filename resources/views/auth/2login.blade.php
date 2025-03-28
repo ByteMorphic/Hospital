@@ -40,7 +40,7 @@
         <!-- Email Input -->
         <div class="mt-4">
             <label class="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200" for="LoggingEmailAddress">Email Address</label>
-            <input id="LoggingEmailAddress" class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300" type="email" />
+            <input id="LoggingEmailAddress" class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-hidden focus:ring-3 focus:ring-blue-300" type="email" />
         </div>
 
         <!-- Password Input with Show/Hide Toggle -->
@@ -53,12 +53,12 @@
             <!-- Password Field with Toggle Button -->
             <div class="relative">
                 <input id="loggingPassword" 
-                       class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300" 
+                       class="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-hidden focus:ring-3 focus:ring-blue-300" 
                        :type="show ? 'text' : 'password'" />
                 
                 <!-- Toggle Button for Show/Hide Password -->
                 <button @click="show = !show" 
-                        class="absolute inset-y-0 right-0 flex items-center px-4 text-gray-600 hover:text-gray-800 focus:outline-none">
+                        class="absolute inset-y-0 right-0 flex items-center px-4 text-gray-600 hover:text-gray-800 focus:outline-hidden">
                     <!-- Eye Closed Icon -->
                     <svg :class="{ 'hidden': show, 'block': !show }" class="h-5 w-5" fill="currentColor dark:text-gray-300" viewBox="0 0 24 24">
                         <path d="M12 4.5c-7.06 0-10 5.43-10 7.5s2.94 7.5 10 7.5 10-5.43 10-7.5-2.94-7.5-10-7.5zm0 13c-5.33 0-8-4.11-8-5.5S6.67 6.5 12 6.5 20 10.61 20 12s-2.67 5.5-8 5.5zm0-8.5a3 3 0 100 6 3 3 0 000-6z"/>
@@ -73,7 +73,7 @@
 
         <!-- Sign In Button -->
         <div class="mt-6">
-            <button class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
+            <button class="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-hidden focus:ring-3 focus:ring-gray-300 focus:ring-opacity-50">
                 Sign In
             </button>
         </div>
