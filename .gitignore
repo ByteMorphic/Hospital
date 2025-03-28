@@ -17,3 +17,6 @@ yarn-error.log
 node_modules
 /.idx
 .idx
+.env
+/public/storage
+/public/build
