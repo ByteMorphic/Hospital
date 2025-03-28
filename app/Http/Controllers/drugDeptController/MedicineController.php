@@ -331,6 +331,7 @@ class MedicineController extends Controller
                 'category' => $medicine->category,
                 'route' => $medicine->route,
                 'generic_name' => $medicine->generic->generic_name ?? 'N/A', // Handle potential null
+                'expiry_date' => $medicine->expiry_date,
                 'quantity' => $medicine->quantity,
                 'total_quantity' => $medicine->total_quantity,
                 'status' => $medicine->status == 1 ? 'Active' : 'Inactive',
@@ -339,7 +340,7 @@ class MedicineController extends Controller
         }
 
         // Define the headers for the Excel file
-        $headers = ['Medicine Name', 'Category', 'Route', 'Generic Name', 'Quantity', 'Total Quantity', 'Status', 'Used'];
+        $headers = ['Medicine Name', 'Category', 'Route', 'Generic Name', 'Expiry Date', 'Quantity', 'Total Quantity', 'Status', 'Used'];
 
         // Call the export service
         $filePath = $this->excelExportService->export($data, $headers, 'medicines.xlsx');
