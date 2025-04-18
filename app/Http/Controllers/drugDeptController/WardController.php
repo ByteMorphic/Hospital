@@ -2,29 +2,34 @@
 
 namespace App\Http\Controllers\drugDeptController;
 
+use App\Http\Controllers\Controller;
+use App\Http\Resources\Ward\WardResource;
 use App\Models\Ward;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Inertia\Inertia;
 
 class WardController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $wards = Ward::paginate(10);
-        return view('drugDept.ward.index', [
-            'wards' => $wards,
-        ]);
-    }
+        $search = $request->get('q');
+        $query = Ward::query();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        return view('drugDept.ward.create');
+        if ($search) {
+            $query->where('ward_name', 'LIKE', "%{$search}%");
+        }
+
+        $wards = $query->paginate(30);
+
+        return Inertia::render('DrugDept/Ward/index', [
+            'wards' => WardResource::collection($wards),
+            'filters' => [
+                'q' => $search,
+            ]
+        ]);
     }
 
     /**
@@ -47,22 +52,6 @@ class WardController extends Controller
         ]);
 
         return redirect('/wards')->with('success', 'Ward created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Ward $ward)
-    {
-        return view('drugDept.ward.show', compact('ward'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Ward $ward)
-    {
-        return view('drugDept.ward.edit', compact('ward'));
     }
 
     /**
@@ -96,25 +85,17 @@ class WardController extends Controller
         return redirect('/wards')->with('info', 'Ward deleted successfully.');
     }
 
-    public function search(Request $request)
+    public function updateStatus(Request $request)
     {
-        $search = $request->get('q');
-        $query = Ward::query();
-
-        if ($search) {
-            $query->where('ward_name', 'LIKE', "%{$search}%");
-        }
-
-        $wards = $query->paginate(30);
-
-        return response()->json([
-            'items' => $wards->map(function ($ward) {
-                return [
-                    'id' => $ward->id,
-                    'text' => $ward->ward_name
-                ];
-            }),
-            'total_count' => $wards->total()
+        $request->validate([
+            'status' => 'required|lowercase|in:block,active',
+            'ward_id' => 'required|exists:wards,id'
         ]);
+
+        $ward = Ward::findOrFail($request->ward_id);
+        $ward->ward_status = $request->status === 'active';
+        $ward->save();
+
+        return back();
     }
 }

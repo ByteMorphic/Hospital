@@ -5,7 +5,9 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Ward;
+use App\Models\Generic;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,26 +16,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Creating Admin User
-        User::factory()->withPersonalTeam()->create([
-            'name' => 'Admin User',
-            'email' => 'admin@mail.com',
-            'role' => 'admin',
-            'password' => Hash::make('12345678'),
-        ]);
+        // User::factory(10)->create();
 
-        // Creating Regular User
-        User::factory()->withPersonalTeam()->create([
-            'name' => 'User',
-            'email' => 'user@mail.com',
-            'role' => 'user',
-            'password' => Hash::make('12345678'),
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
 
-        $this->call([
-            WardSeeder::class,
-            GenericSeeder::class,
-            MedicineSeeder::class,
-        ]);
+
+
+        Ward::factory(30)->create();
+        Generic::factory(30)->create();
     }
 }
